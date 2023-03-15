@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Client WhatsApp</title>
+</head>
+<body>
+    <form method="post" id="cityform">
+        <button id="submitBtn" type="submit">Send WhatsApp</button>
+    </form>
+</body>
+</html>
+<script src="https://code.jquery.com/jquery-3.6.4.js" integrity="sha256-a9jBBRygX1Bh5lt8GZjXDzyOB+bWve9EiO7tROUtj/E=" crossorigin="anonymous"></script>
+<script>
+    $("#cityform").submit(function(e) {
+        e.preventDefault();
+        try{$.ajax({
+            url: "http://localhost:8000/send-message",
+            type: "POST",
+            data: {
+                'number': '085802520642',
+                'message': 'AdrianAPI',
+            },
+            success: function(data){
+                alert('WhatsApp Sended to Adrian')
+            },
+            error: function (request, status, error) {
+                alert(JSON.parse(request.responseText).message.message);
+            }
+        });
+    } catch (err){
+        alert(err.message)
+    } 
+        
+    });
+</script>
